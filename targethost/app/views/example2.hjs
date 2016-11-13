@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Stealing a Form</title>
+</head>
+<body>
+  <form id="form1" action="/api/simplelogin" method="POST">
+    Login <input name="login" type="text" /><br />
+    Password <input name="pwd" type="password" /><br />
+    <button type="submit">Submit</button>
+  </form>
+  <hr />
+  <button onclick="execPayload()">Run Payload</button>
+  <script type="text/javascript">
+    function execPayload() {
+      console.log('payload armed');
+      document.getElementById('form1').onsubmit =
+      (function(z) {
+        return function() {
+          var els = document.getElementsByTagName('input');
+          console.log(els[0].value + ':' + els[1].value);
+          if(z === false) {
+            z = true;
+            setTimeout(function(){ document.getElementById('form1').submit();},3000);
+            return false;
+          } else {
+            return true;
+          }
+        }
+      })(false);
+    }
+  </script>
+</body>
+</html>

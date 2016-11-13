@@ -1,0 +1,4 @@
+.DS_Store
+targethost/app/node_modules/*
+targethost/.vagrant
+evilhost/.vagrant

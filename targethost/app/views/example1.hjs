@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Example: DOM traversal</title>
+</head>
+<body>
+  <grandparent>
+    <parent>
+      <yourElement id="you">
+        <child>
+          <grandChild />
+        </child>
+      </yourElement>
+    </parent>
+    <aunt>
+      <cousin><!--get here from you --></cousin>
+    </aunt>
+  </grandparent>
+</body>
+</html>

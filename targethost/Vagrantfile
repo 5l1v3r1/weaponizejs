@@ -1,0 +1,25 @@
+# -*- mode: ruby -*-
+# vi: set ft=ruby :
+DB_ROOT_PWD = "root"
+APP_DB_SCHEMA_NAME = "targetapp"
+APP_DB_USER = "target"
+APP_DB_PWD = "password"
+APP_MOUNT = "/targetapp"
+#http://bitcubby.com/configuring-vagrant-json-ruby/ - storing variables in json - might use thi later
+
+Vagrant.configure("2") do |config|
+  # The most common configuration options are documented and commented below.
+  # For a complete reference, please see the online documentation at
+  # https://docs.vagrantup.com.
+
+  # Every Vagrant development environment requires a box. You can search for
+  # boxes at https://atlas.hashicorp.com/search.
+  config.vm.box = "bento/ubuntu-14.04"
+  config.vm.network "private_network", ip: "192.168.33.101"
+  config.vm.hostname = "targetapp"
+  config.vm.define "targetapp"
+  config.vm.synced_folder "./app", APP_MOUNT
+
+  config.vm.provision :shell, :path => "vagrant_bootstrap/bootstrap.sh", :args => [DB_ROOT_PWD, APP_DB_SCHEMA_NAME, APP_DB_USER, APP_DB_PWD, APP_MOUNT]
+
+end
